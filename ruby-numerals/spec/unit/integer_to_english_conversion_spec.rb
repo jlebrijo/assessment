@@ -29,4 +29,8 @@ describe "Integer to English conversion" do
     it { 2001.to_english.should == "two thousand and one" }
     it { 999_999.to_english.should == "nine hundred and ninety-nine thousand and nine hundred and ninety-nine" }
   end
+
+  it "raises an exception if maximum value overflows" do
+    expect{(Integer::MAX_VALUE + 1).to_english}.to raise_error(RuntimeError, "Max value accepted is 999999")
+  end
 end
