@@ -1,17 +1,24 @@
 class Integer
 
-  BASIC_NUMBERS = %w( one two three four five six seven eight nine ten
-                        eleven twelve thirteen fourteen fifteen sixteen
-                        seventeen eighteen nineteen twenty )
+  UNITS = { 0 => "zero", 1 => "one", 2 => "two", 3 => "three", 4 => "four", 5 => "five", 6 => "six",
+      7 => "seven", 8 => "eight", 9 => "nine"}
+
+  TEENS = { 10 => "ten", 11 => "eleven", 12 => "twelve",
+      13 => "thirteen", 14 => "fourteen", 15 => "fifteen", 16 => "sixteen", 17 => "seventeen",
+      18 => "eighteen", 19 => "nineteen"}
 
   def to_english
 
-    return "zero" if self == 0
-
-    counter = self
-    if counter > 20
-      return "twenty-#{BASIC_NUMBERS[counter-1-20]}"
+    if self >= 30
+      units = self-30
+      return "thirty-#{UNITS[units]}" if units > 0
+      return "thirty"
     end
-    return BASIC_NUMBERS[self-1]
+    if self >= 20
+      units = self-20
+      return "twenty-#{UNITS[units]}" if units > 0
+      return "twenty"
+    end
+    return UNITS[self] || TEENS[self]
   end
 end
