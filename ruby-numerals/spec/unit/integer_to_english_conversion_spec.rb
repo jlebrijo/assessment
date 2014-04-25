@@ -25,6 +25,8 @@ describe "Integer to English conversion" do
   end
 
   describe "Thousands" do
-    it "converts 2001 to two thousand and one"
+    it { 2000.to_english.should == "two thousand" }
+    it { 2001.to_english.should == "two thousand and one" }
+    it { 999_999.to_english.should == "nine hundred and ninety-nine thousand and nine hundred and ninety-nine" }
   end
 end
