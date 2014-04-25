@@ -7,18 +7,19 @@ class Integer
       13 => "thirteen", 14 => "fourteen", 15 => "fifteen", 16 => "sixteen", 17 => "seventeen",
       18 => "eighteen", 19 => "nineteen"}
 
+  TENS = { 20 => "twenty", 30 => "thirty", 40 => "forty", 50 => "fifty", 60 => "sixty",
+      70 => "seventy", 80 => "eighty", 90 => "ninety"}
+
   def to_english
 
-    if self >= 30
-      units = self-30
-      return "thirty-#{UNITS[units]}" if units > 0
-      return "thirty"
+    TENS.reverse_each do |number, word|
+      units = self - number
+      if units >= 0
+        return "#{word}-#{UNITS[units]}" if units > 0
+        return word
+      end
     end
-    if self >= 20
-      units = self-20
-      return "twenty-#{UNITS[units]}" if units > 0
-      return "twenty"
-    end
+
     return UNITS[self] || TEENS[self]
   end
 end

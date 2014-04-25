@@ -26,8 +26,14 @@ describe "Integer to English conversion" do
   it "converts 31 to thirty-one" do
     31.to_english.should == "thirty-one"
   end
+  it "converts 42 to forty-two" do
+    42.to_english.should == "forty-two"
+  end
+  it "converts 99 to ninety-nine" do
+    99.to_english.should == "ninety-nine"
+  end
 
-  it "converts 42 to forty-two"
+
   it "converts 1999 to nineteen hundred and ninety-nine"
   it "converts 2001 to two thousand and one"
 end
