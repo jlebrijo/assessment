@@ -1,0 +1,10 @@
+%h1 Convert any number from 0 to 999.999 to its english phrase
+
+= form_tag '/to_english' do
+  = label_tag 'number', "Number: "
+  = number_field_tag 'number', params[:number], in: 0...1_000_000
+  = submit_tag "Convert"
+
+- if @result
+  %h3 Result:
+  #result= @result

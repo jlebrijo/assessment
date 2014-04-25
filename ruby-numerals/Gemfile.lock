@@ -28,6 +28,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    better_errors (1.1.0)
+      coderay (>= 1.0.0)
+      erubis (>= 2.6.6)
     builder (3.2.2)
     capybara (2.2.1)
       mime-types (>= 1.16)
@@ -70,6 +73,13 @@ GEM
     guard-rspec (4.2.8)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
+    haml (4.0.5)
+      tilt
+    haml-rails (0.5.3)
+      actionpack (>= 4.0.1)
+      activesupport (>= 4.0.1)
+      haml (>= 3.1, < 5.0)
+      railties (>= 4.0.1)
     hike (1.2.3)
     http_parser.rb (0.6.0)
     i18n (0.6.9)
@@ -189,11 +199,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  better_errors
   capybara
   coffee-rails (~> 4.0.0)
   guard
   guard-livereload
   guard-rspec
+  haml-rails
   jbuilder (~> 2.0)
   jquery-rails
   rails (= 4.1.0)
