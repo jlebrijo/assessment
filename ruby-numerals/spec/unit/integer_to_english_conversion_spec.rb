@@ -18,9 +18,13 @@ describe "Integer to English conversion" do
     it { 99.to_english.should == "ninety-nine" }
   end
 
+  describe "Hundreds" do
+    it { 100.to_english.should == "one hundred" }
+    it { 101.to_english.should == "one hundred and one" }
+    it { 1999.to_english.should == "nineteen hundred and ninety-nine" }
+  end
 
-
-
-  it "converts 1999 to nineteen hundred and ninety-nine"
-  it "converts 2001 to two thousand and one"
+  describe "Thousands" do
+    it "converts 2001 to two thousand and one"
+  end
 end
