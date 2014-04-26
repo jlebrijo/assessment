@@ -8,22 +8,34 @@ class Integer
   TENS = { 20 => "twenty", 30 => "thirty", 40 => "forty", 50 => "fifty", 60 => "sixty",
       70 => "seventy", 80 => "eighty", 90 => "ninety"}
 
-  MAX_VALUE = 999_999
+  MAX_VALUE = 999_999_999_999
 
   def to_english
-    if self > MAX_VALUE
-      raise "Max value accepted is #{MAX_VALUE}"
-    elsif self.between?(2000, 999_999)
-      thousands = (self/1000).floor
-      thousands_word = "#{zero_to_1999(thousands)} thousand"
-      units = self - 1000 * thousands
-      return (units == 0 ? thousands_word : "#{thousands_word} and #{zero_to_1999(units)}")
+    raise "Max value accepted is #{MAX_VALUE}" if self > MAX_VALUE
+
+    if self.between?(1_000_000, 999_999_999)
+      millions = (self/1_000_000).floor
+      millions_word = "#{zero_to_999_999(millions)} million"
+      units = self - 1_000_000 * millions
+      return (units == 0 ? millions_word : "#{millions_word} and #{zero_to_999_999(units)}")
     else
-      return zero_to_1999(self)
+      zero_to_999_999(self)
     end
+
   end
 
   private
+
+  def zero_to_999_999(numeral)
+    if numeral.between?(2000, 999_999)
+      thousands = (numeral/1000).floor
+      thousands_word = "#{zero_to_1999(thousands)} thousand"
+      units = numeral - 1000 * thousands
+      return (units == 0 ? thousands_word : "#{thousands_word} and #{zero_to_1999(units)}")
+    else
+      return zero_to_1999(numeral)
+    end
+  end
 
   def zero_to_1999(numeral)
     if numeral.between?(100, 1999)
