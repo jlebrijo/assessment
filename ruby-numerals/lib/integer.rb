@@ -8,32 +8,30 @@ class Integer
   TENS = { 20 => "twenty", 30 => "thirty", 40 => "forty", 50 => "fifty", 60 => "sixty",
       70 => "seventy", 80 => "eighty", 90 => "ninety"}
 
-  MAX_VALUE = 999_999_999_999
+  EXPONENTS = { 3 => "thousand", 6 => "million", 9 =>"billion" }
+
+  MAX_EXPONENT = EXPONENTS.max[0]
+
+  MAX_VALUE = 10**(MAX_EXPONENT+3)-1
+
 
   def to_english
     raise "Max value accepted is #{MAX_VALUE}" if self > MAX_VALUE
-
-    if self.between?(1_000_000_000, 999_999_999_999)
-      billions = (self/1_000_000_000).floor
-      billions_word = "#{zero_to_999_999_999(billions)} billion"
-      units = self - 1_000_000_000 * billions
-      return (units == 0 ? billions_word : "#{billions_word} and #{zero_to_999_999_999(units)}")
-    else
-      zero_to_999_999_999(self)
-    end
-
+    zero_to_number(self, MAX_EXPONENT)
   end
 
   private
 
-  def zero_to_999_999_999(numeral)
-    if numeral.between?(1_000_000, 999_999_999)
-      millions = (numeral/1_000_000).floor
-      millions_word = "#{zero_to_999_999(millions)} million"
-      units = numeral - 1_000_000 * millions
-      return (units == 0 ? millions_word : "#{millions_word} and #{zero_to_999_999(units)}")
+  def zero_to_number(numeral, exponent)
+    if exponent == 3
+      return zero_to_999_999(numeral)
+    elsif numeral.between?(10**exponent, 10**(exponent+3)-1)
+      thousands = (numeral/10**exponent).floor
+      thousands_word = "#{zero_to_number(thousands, exponent-3)} #{EXPONENTS[exponent]}"
+      units = numeral - 10**exponent * thousands
+      return (units == 0 ? thousands_word : "#{thousands_word} and #{zero_to_number(units, exponent-3)}")
     else
-      zero_to_999_999(numeral)
+      return zero_to_number(numeral, exponent-3)
     end
   end
 
@@ -51,7 +49,7 @@ class Integer
   def zero_to_1999(numeral)
     if numeral.between?(100, 1999)
       hundreds = (numeral/100).floor
-      hundreds_word = "#{UNITS_TEENS[hundreds]} hundred"
+      hundreds_word = "#{zero_to_99(hundreds)} hundred"
       units = numeral - 100 * hundreds
       return (units == 0 ? hundreds_word : "#{hundreds_word} and #{zero_to_99(units)}")
     else
