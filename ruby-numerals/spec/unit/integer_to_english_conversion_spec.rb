@@ -42,6 +42,13 @@ describe "Integer to English conversion" do
     it { 789_347_897_001.to_english.should == "seven hundred and eighty-nine billion and three hundred and forty-seven million and eight hundred and ninety-seven thousand and one"}
   end
 
+  describe "Large numbers" do
+    it { (10**24).to_english.should == "one septillion"}
+    it { (10**42+43).to_english.should == "one tredecillion and forty-three"}
+    it { 789_000_000_000_000_000_000_001.to_english.should == "seven hundred and eighty-nine sextillion and one" }
+    it { 789_347_897_001_789_347_897_001.to_english.should == "seven hundred and eighty-nine sextillion and three hundred and forty-seven quintillion and eight hundred and ninety-seven quadrillion and one trillion and seven hundred and eighty-nine billion and three hundred and forty-seven million and eight hundred and ninety-seven thousand and one" }
+  end
+
   it "raises an exception if maximum value overflows" do
     expect{(Integer::MAX_VALUE + 1).to_english}.to raise_error(RuntimeError, "Max value accepted is #{Integer::MAX_VALUE}")
   end
