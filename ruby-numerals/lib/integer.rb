@@ -13,18 +13,29 @@ class Integer
   def to_english
     raise "Max value accepted is #{MAX_VALUE}" if self > MAX_VALUE
 
-    if self.between?(1_000_000, 999_999_999)
-      millions = (self/1_000_000).floor
-      millions_word = "#{zero_to_999_999(millions)} million"
-      units = self - 1_000_000 * millions
-      return (units == 0 ? millions_word : "#{millions_word} and #{zero_to_999_999(units)}")
+    if self.between?(1_000_000_000, 999_999_999_999)
+      billions = (self/1_000_000_000).floor
+      billions_word = "#{zero_to_999_999_999(billions)} billion"
+      units = self - 1_000_000_000 * billions
+      return (units == 0 ? billions_word : "#{billions_word} and #{zero_to_999_999_999(units)}")
     else
-      zero_to_999_999(self)
+      zero_to_999_999_999(self)
     end
 
   end
 
   private
+
+  def zero_to_999_999_999(numeral)
+    if numeral.between?(1_000_000, 999_999_999)
+      millions = (numeral/1_000_000).floor
+      millions_word = "#{zero_to_999_999(millions)} million"
+      units = numeral - 1_000_000 * millions
+      return (units == 0 ? millions_word : "#{millions_word} and #{zero_to_999_999(units)}")
+    else
+      zero_to_999_999(numeral)
+    end
+  end
 
   def zero_to_999_999(numeral)
     if numeral.between?(2000, 999_999)

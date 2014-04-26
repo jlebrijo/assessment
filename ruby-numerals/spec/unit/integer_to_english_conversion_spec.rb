@@ -36,6 +36,12 @@ describe "Integer to English conversion" do
     it { 789_347_001.to_english.should == "seven hundred and eighty-nine million and three hundred and forty-seven thousand and one"}
   end
 
+  describe "Billions" do
+    it { 1_000_000_000.to_english.should == "one billion"}
+    it { 3_000_000_015.to_english.should == "three billion and fifteen"}
+    it { 789_347_897_001.to_english.should == "seven hundred and eighty-nine billion and three hundred and forty-seven million and eight hundred and ninety-seven thousand and one"}
+  end
+
   it "raises an exception if maximum value overflows" do
     expect{(Integer::MAX_VALUE + 1).to_english}.to raise_error(RuntimeError, "Max value accepted is #{Integer::MAX_VALUE}")
   end
