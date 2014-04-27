@@ -22,8 +22,8 @@ class Integer
 
 
   def to_english
-    raise "Max value accepted is #{MAX_VALUE}" if self > MAX_VALUE
-    zero_to_exponent(self, MAX_EXPONENT)
+    raise "Max absolute value accepted is #{MAX_VALUE}" if self.abs > MAX_VALUE
+    "#{"minus " if self < 0 }#{zero_to_exponent(self.abs, MAX_EXPONENT)}"
   end
 
   private
