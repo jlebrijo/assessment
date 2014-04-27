@@ -29,26 +29,16 @@ class Integer
   private
 
   def zero_to_number(numeral, exponent)
-    if exponent == 3
-      return zero_to_999_999(numeral)
-    elsif numeral.between?(10**exponent, 10**(exponent+3)-1)
+    range_min = (exponent == 3 ? 2000 : 10**exponent)
+    if exponent == 0
+      return zero_to_1999(numeral)
+    elsif numeral.between?(range_min, 10**(exponent+3)-1)
       thousands = (numeral/10**exponent).floor
       thousands_word = "#{zero_to_number(thousands, exponent-3)} #{EXPONENTS[exponent]}"
       units = numeral - 10**exponent * thousands
       return (units == 0 ? thousands_word : "#{thousands_word} and #{zero_to_number(units, exponent-3)}")
     else
       return zero_to_number(numeral, exponent-3)
-    end
-  end
-
-  def zero_to_999_999(numeral)
-    if numeral.between?(2000, 999_999)
-      thousands = (numeral/1000).floor
-      thousands_word = "#{zero_to_1999(thousands)} thousand"
-      units = numeral - 1000 * thousands
-      return (units == 0 ? thousands_word : "#{thousands_word} and #{zero_to_1999(units)}")
-    else
-      return zero_to_1999(numeral)
     end
   end
 
