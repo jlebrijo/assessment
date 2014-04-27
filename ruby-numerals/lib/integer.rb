@@ -23,22 +23,22 @@ class Integer
 
   def to_english
     raise "Max value accepted is #{MAX_VALUE}" if self > MAX_VALUE
-    zero_to_number(self, MAX_EXPONENT)
+    zero_to_exponent(self, MAX_EXPONENT)
   end
 
   private
 
-  def zero_to_number(numeral, exponent)
+  def zero_to_exponent(numeral, exponent)
     range_min = (exponent == 3 ? 2000 : 10**exponent)
     if exponent == 0
       return zero_to_1999(numeral)
     elsif numeral.between?(range_min, 10**(exponent+3)-1)
       thousands = (numeral/10**exponent).floor
-      thousands_word = "#{zero_to_number(thousands, exponent-3)} #{EXPONENTS[exponent]}"
+      thousands_word = "#{zero_to_exponent(thousands, exponent-3)} #{EXPONENTS[exponent]}"
       units = numeral - 10**exponent * thousands
-      return (units == 0 ? thousands_word : "#{thousands_word} and #{zero_to_number(units, exponent-3)}")
+      return (units == 0 ? thousands_word : "#{thousands_word} and #{zero_to_exponent(units, exponent-3)}")
     else
-      return zero_to_number(numeral, exponent-3)
+      return zero_to_exponent(numeral, exponent-3)
     end
   end
 
