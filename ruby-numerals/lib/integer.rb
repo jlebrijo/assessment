@@ -18,11 +18,11 @@ class Integer
 
   MAX_EXPONENT = EXPONENTS.max[0]
 
-  MAX_VALUE = 10**(MAX_EXPONENT+3)-1
+  MAX_ABSOLUTE_VALUE = 10**(MAX_EXPONENT+3)-1
 
 
   def to_english
-    raise "Max absolute value accepted is #{MAX_VALUE}" if self.abs > MAX_VALUE
+    raise "Max absolute value accepted is #{MAX_ABSOLUTE_VALUE}" if self.abs > MAX_ABSOLUTE_VALUE
     "#{"minus " if self < 0 }#{zero_to_exponent(self.abs, MAX_EXPONENT)}"
   end
 

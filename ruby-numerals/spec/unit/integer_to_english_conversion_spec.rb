@@ -55,6 +55,6 @@ describe "Integer to English conversion" do
   end
 
   it "raises an exception if maximum value overflows" do
-    expect{(Integer::MAX_VALUE + 1).to_english}.to raise_error(RuntimeError, "Max value accepted is #{Integer::MAX_VALUE}")
+    expect{(Integer::MAX_ABSOLUTE_VALUE + 1).to_english}.to raise_error(RuntimeError, "Max absolute value accepted is #{Integer::MAX_ABSOLUTE_VALUE}")
   end
 end
